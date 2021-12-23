@@ -5,12 +5,7 @@
     "node": true
   },
   "parser": "@typescript-eslint/parser",
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier",
-    "prettier/@typescript-eslint"
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "plugins": ["@typescript-eslint", "prettier"],
   "ignorePatterns": ["node_modules/"],
   "rules": {}
