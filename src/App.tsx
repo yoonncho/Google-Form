@@ -1,5 +1,17 @@
+import styled from 'styled-components';
+import { TitleBox } from './components';
+
+const Wrapper = styled.div`
+  ${({ theme }) => theme.flexCenter};
+  margin-top: 100px;
+`;
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <Wrapper>
+      <TitleBox />
+    </Wrapper>
+  );
 };
 
 export default App;

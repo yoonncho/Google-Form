@@ -14,8 +14,8 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-text-size-adjust: none;
         font-family: 'Spoqa Han Sans Neo', 'sans-serif';
         font-display: fallback;
-        color: "#333333";
-        background-color: "#000000";
+        color:  ${({ theme }) => theme.color.black};
+        background-color: ${({ theme }) => theme.color.background};
         -ms-overflow-style: none; 
         -webkit-user-select: none;
         -moz-user-select: none;
