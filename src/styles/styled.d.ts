@@ -10,6 +10,7 @@ declare module 'styled-components' {
       black: string;
       gray: string;
       borderGray: string;
+      border_gray2: string;
       blue: string;
       red: string;
     };

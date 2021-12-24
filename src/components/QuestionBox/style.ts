@@ -16,10 +16,11 @@ export const useStyles = makeStyles({
 export const Wrapper = styled.div`
   background: ${theme.color.white};
   width: 768px;
-  height: 280px;
+  height: 240px;
   border-radius: 10px;
   margin-top: 20px;
   padding: 20px;
+  height: auto !important;
 
   input {
     border: none;
@@ -28,24 +29,29 @@ export const Wrapper = styled.div`
   .question {
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 
   .question-input {
     background: ${theme.color.gray};
-    width: 400px;
+    width: 440px;
     height: 48px;
     padding: 10px;
     font-size: 16px;
-    margin-right: 60px;
-    border: 1px solid ${theme.color.gray};
+    border-bottom: 1px solid ${theme.color.border_gray2};
+
+    &:focus {
+      transition: 0.1s ease;
+      border-bottom: 2px solid ${({ theme }) => theme.color.purple};
+    }
 
     &::placeholder {
-      color: ${theme.color.black};
+      color: ${theme.color.border_gray2};
     }
   }
 
   hr {
-    margin-top: 152px;
+    margin-top: 60px;
     border: 1px solid ${theme.color.borderGray};
   }
 
