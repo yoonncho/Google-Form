@@ -1,18 +1,37 @@
 import { useState } from 'react';
-import { useInput } from '../../hooks';
+import { useAppSelector, useInput } from '../../hooks';
 import Dropdown from '../Dropdown';
 import { Wrapper, useStyles } from './style';
 import { Switch } from '@material-ui/core';
 import { TrashIcon, CopyIcon } from '../../assets';
-import { OptionalQuestion } from '../Question';
+import { OptionalQuestion, NarrativeQuestion } from '../Question';
+import { QUESTION_TYPES } from '../const';
 
 const QuestionBox = () => {
   const classes = useStyles();
   const question = useInput('');
   const [isNecessary, setIsNecessary] = useState<boolean>(false);
+  const { type: questionType } = useAppSelector((state) => state.questionReducer);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsNecessary(e.target.checked);
+  };
+
+  const getInput = () => {
+    switch (questionType) {
+      case QUESTION_TYPES.ONE_CHOICE:
+        return <OptionalQuestion type="radio" />;
+      case QUESTION_TYPES.MULTIPLE_CHOICE:
+        return <OptionalQuestion type="check" />;
+      case QUESTION_TYPES.DROP_DOWN:
+        return <OptionalQuestion type="dropdown" />;
+      case QUESTION_TYPES.SHORT_ANSWER:
+        return <NarrativeQuestion type="short" />;
+      case QUESTION_TYPES.LONG_ANSWER:
+        return <NarrativeQuestion type="long" />;
+      default:
+        return;
+    }
   };
 
   return (
@@ -27,7 +46,7 @@ const QuestionBox = () => {
         />
         <Dropdown />
       </div>
-      <OptionalQuestion type="radio" />
+      {getInput()}
       <hr />
       <div className="settings">
         <img src={CopyIcon} alt="copy" />

@@ -1,68 +1,48 @@
 import { useState } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { createStyles, makeStyles, Theme, ThemeProvider, unstable_createMuiStrictModeTheme } from '@material-ui/core';
-import { theme as styleTheme } from '../../styles/theme';
+import { useStyles } from './style';
+import { ThemeProvider, unstable_createMuiStrictModeTheme } from '@material-ui/core';
+import { questionActions } from '../../slices/question';
+import { useDispatch } from 'react-redux';
+import { QUESTION_TYPES } from '../const';
 
 const menus = [
-  { id: 1, type: '단답형' },
+  { id: QUESTION_TYPES.SHORT_ANSWER, type: '단답형' },
   {
-    id: 2,
+    id: QUESTION_TYPES.LONG_ANSWER,
     type: '장문형',
   },
   {
-    id: 3,
+    id: QUESTION_TYPES.ONE_CHOICE,
     type: '객관식 질문',
   },
   {
-    id: 4,
+    id: QUESTION_TYPES.MULTIPLE_CHOICE,
     type: '체크박스',
   },
   {
-    id: 5,
+    id: QUESTION_TYPES.DROP_DOWN,
     type: '드롭다운',
   },
 ];
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: theme.spacing(26),
-      borderRadius: '4px',
-      fontSize: '16px',
-      border: `1px solid ${styleTheme.color.borderGray}`,
-
-      '& .MuiSelect-select.MuiSelect-select': {
-        padding: '12px',
-      },
-
-      '& .MuiSelect-icon': {
-        width: '1.6em',
-        height: '1.6em',
-        right: '10px',
-      },
-    },
-
-    menu: {
-      fontSize: '16px',
-    },
-  }),
-);
-
 const Dropdown = () => {
   const classes = useStyles();
   const theme = unstable_createMuiStrictModeTheme();
-  const [type, setType] = useState<unknown>('단답형');
+  const [type, setType] = useState<unknown>(2);
+  const dispatch = useDispatch();
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setType(event.target.value);
+    dispatch(questionActions.changeType(event.target.value));
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Select fullWidth className={classes.root} disableUnderline value={type} onChange={handleChange}>
         {menus.map((menu) => (
-          <MenuItem key={menu.id} value={menu.type} className={classes.menu}>
+          <MenuItem key={menu.id} value={menu.id} className={classes.menu}>
             {menu.type}
           </MenuItem>
         ))}
