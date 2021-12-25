@@ -65,6 +65,13 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
     addQuestion: (state) => {
       state.push(getNewQuestion(state.length));
     },
+    deleteQuestion: (state, action) => {
+      const id = action.payload;
+      state.splice(
+        state.findIndex((item) => item.id === Number(id)),
+        1,
+      );
+    },
   },
 });
 

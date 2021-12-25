@@ -1,9 +1,10 @@
 import { Radio, Checkbox } from '@material-ui/core';
 import { Wrapper, useStyles } from './style';
 import { useInput } from '../../../hooks';
+import { QUESTION_TYPES } from '../../../const';
 
 interface QuestionProps {
-  type: 'radio' | 'check' | 'dropdown';
+  type: number;
   questionId: number;
 }
 
@@ -13,11 +14,11 @@ const OptionQuestion = ({ type, questionId }: QuestionProps) => {
 
   const showOptionButton = () => {
     switch (type) {
-      case 'radio':
+      case QUESTION_TYPES.ONE_CHOICE:
         return <Radio className={classes.root} disabled />;
-      case 'check':
+      case QUESTION_TYPES.MULTIPLE_CHOICE:
         return <Checkbox className={classes.root} disabled />;
-      case 'dropdown':
+      case QUESTION_TYPES.DROP_DOWN:
         return <div className="dropdown-option">{questionId}</div>;
       default:
         return;
