@@ -7,18 +7,10 @@ export interface FormProps {
 
 interface Props {
   info: FormProps;
-  setInfo: React.Dispatch<React.SetStateAction<FormProps>>;
+  handleChange: (name: string, value: string) => void;
 }
 
-const TitleBox = ({ info, setInfo }: Props) => {
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setInfo({
-      ...info,
-      [name]: value,
-    });
-  };
-
+const TitleBox = ({ info, handleChange }: Props) => {
   return (
     <Wrapper>
       <div className="inputs">
@@ -28,7 +20,7 @@ const TitleBox = ({ info, setInfo }: Props) => {
           placeholder="제목 없는 설문지"
           name="formTitle"
           value={info.formTitle}
-          onChange={handleChange}
+          onChange={({ target: { value } }) => handleChange('formTitle', value)}
         />
         <input
           type="text"
@@ -36,7 +28,7 @@ const TitleBox = ({ info, setInfo }: Props) => {
           placeholder="설문지 설명"
           name="formDetail"
           value={info.formDetail}
-          onChange={handleChange}
+          onChange={({ target: { value } }) => handleChange('formDetail', value)}
         />
       </div>
     </Wrapper>
