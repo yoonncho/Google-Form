@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { QUESTION_TYPES } from '../components/const';
+import { QUESTION_TYPES } from '../const';
 
 interface Question {
   id: number;

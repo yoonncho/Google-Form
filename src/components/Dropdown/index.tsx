@@ -5,7 +5,7 @@ import { useStyles } from './style';
 import { ThemeProvider, unstable_createMuiStrictModeTheme } from '@material-ui/core';
 import { questionActions } from '../../slices';
 import { useDispatch } from 'react-redux';
-import { QUESTION_TYPES } from '../const';
+import { QUESTION_TYPES } from '../../const';
 
 const menus = [
   { id: QUESTION_TYPES.SHORT_ANSWER, type: '단답형' },

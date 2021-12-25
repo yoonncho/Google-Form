@@ -5,7 +5,7 @@ import { Wrapper, useStyles } from './style';
 import { Switch } from '@material-ui/core';
 import { TrashIcon, CopyIcon } from '../../assets';
 import { OptionalQuestion, NarrativeQuestion } from '../Question';
-import { QUESTION_TYPES } from '../const';
+import { QUESTION_TYPES } from '../../const';
 
 interface QuestionProps {
   id: number;
