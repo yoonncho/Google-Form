@@ -33,6 +33,19 @@ const initialState: Question[] = [
   },
 ];
 
+const getNewQuestion = (newId: number) => ({
+  id: newId,
+  type: QUESTION_TYPES.ONE_CHOICE,
+  questionContent: '',
+  isNecessary: false,
+  options: [
+    {
+      id: 1,
+      optionContent: '',
+    },
+  ],
+});
+
 const { actions: questionActions, reducer: questionReducer } = createSlice({
   name: 'question',
   initialState,
@@ -48,6 +61,9 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
     setQuestionContent: (state, action) => {
       const { id, questionContent } = action.payload;
       state[id].questionContent = questionContent;
+    },
+    addQuestion: (state) => {
+      state.push(getNewQuestion(state.length));
     },
   },
 });

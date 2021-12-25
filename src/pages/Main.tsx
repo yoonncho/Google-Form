@@ -35,6 +35,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin-top: 100px;
   position: relative;
+  margin-bottom: 100px;
 `;
 
 export default Main;

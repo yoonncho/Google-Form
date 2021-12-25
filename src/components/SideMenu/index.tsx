@@ -2,7 +2,7 @@ import { ShowIcon, AddIcon } from '../../assets';
 import { FormProps } from '../TitleBox';
 import { Wrapper } from './style';
 import { useDispatch } from 'react-redux';
-import { formActions } from '../../slices';
+import { formActions, questionActions } from '../../slices';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -16,13 +16,17 @@ const SideMenu = ({ info }: Props) => {
     dispatch(formActions.addForm(info));
   };
 
+  const handleAddQuestion = () => {
+    dispatch(questionActions.addQuestion());
+  };
+
   return (
     <Wrapper>
       <div className="container">
         <Link to="/preview" target="_blank" rel="noreferrer noopener">
           <img onClick={handlePreview} src={ShowIcon} alt="preview" />
         </Link>
-        <img src={AddIcon} alt="add" />
+        <img onClick={handleAddQuestion} src={AddIcon} alt="add" />
       </div>
     </Wrapper>
   );
