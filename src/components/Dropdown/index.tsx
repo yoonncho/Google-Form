@@ -3,7 +3,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { useStyles } from './style';
 import { ThemeProvider, unstable_createMuiStrictModeTheme } from '@material-ui/core';
-import { questionActions } from '../../slices/question';
+import { questionActions } from '../../slices';
 import { useDispatch } from 'react-redux';
 import { QUESTION_TYPES } from '../const';
 
@@ -27,7 +27,11 @@ const menus = [
   },
 ];
 
-const Dropdown = () => {
+interface Props {
+  questionId: number;
+}
+
+const Dropdown = ({ questionId }: Props) => {
   const classes = useStyles();
   const theme = unstable_createMuiStrictModeTheme();
   const [type, setType] = useState<unknown>(2);
@@ -35,7 +39,7 @@ const Dropdown = () => {
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setType(event.target.value);
-    dispatch(questionActions.changeType(event.target.value));
+    dispatch(questionActions.changeType({ id: questionId, type: event.target.value }));
   };
 
   return (

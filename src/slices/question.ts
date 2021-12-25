@@ -1,17 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { QUESTION_TYPES } from '../components/const';
 
-const { actions: questionActions, reducer: questionReducer } = createSlice({
-  name: 'question',
+interface Question {
+  id: number;
+  type: number;
+}
 
-  initialState: {
-    id: 1,
+const initialState: Question[] = [
+  {
+    id: 0,
     type: QUESTION_TYPES.ONE_CHOICE,
   },
+];
 
+const { actions: questionActions, reducer: questionReducer } = createSlice({
+  name: 'question',
+  initialState,
   reducers: {
     changeType: (state, action) => {
-      return { ...state, type: action.payload };
+      const { id, type } = action.payload;
+      state[id].type = type;
     },
   },
 });

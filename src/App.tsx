@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import { QuestionBox, TitleBox, SideMenu } from './components';
+import { TitleBox, SideMenu } from './components';
+import { QuestionContainer } from './containers';
 
 const Wrapper = styled.div`
   ${({ theme }) => theme.flexCenter};
@@ -9,11 +11,16 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
+  const [info, setInfo] = useState({
+    formTitle: '',
+    formDetail: '',
+  });
+
   return (
     <Wrapper>
-      <TitleBox />
-      <QuestionBox />
-      <SideMenu />
+      <TitleBox info={info} setInfo={setInfo} />
+      <QuestionContainer />
+      <SideMenu info={info} />
     </Wrapper>
   );
 };

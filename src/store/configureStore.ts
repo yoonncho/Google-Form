@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import questionReducer from '../slices/question';
+import { questionReducer, formReducer } from '../slices';
 
 export const store = configureStore({
   reducer: {
-    questionReducer,
+    questions: questionReducer,
+    form: formReducer,
   },
 });
 

@@ -7,11 +7,15 @@ import { TrashIcon, CopyIcon } from '../../assets';
 import { OptionalQuestion, NarrativeQuestion } from '../Question';
 import { QUESTION_TYPES } from '../const';
 
-const QuestionBox = () => {
+interface QuestionProps {
+  id: number;
+}
+
+const QuestionBox = ({ id }: QuestionProps) => {
   const classes = useStyles();
   const question = useInput('');
   const [isNecessary, setIsNecessary] = useState<boolean>(false);
-  const { type: questionType } = useAppSelector((state) => state.questionReducer);
+  const { type: questionType } = useAppSelector((state) => state.questions)[id];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsNecessary(e.target.checked);
@@ -44,7 +48,7 @@ const QuestionBox = () => {
           value={question.value}
           onChange={question.onChange}
         />
-        <Dropdown />
+        <Dropdown questionId={id} />
       </div>
       {getInput()}
       <hr />

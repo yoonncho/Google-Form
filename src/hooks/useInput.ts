@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-type InputType = {
+interface InputType {
   value: string;
   onChange: ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => void;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-};
+}
 
 const useInput = (defaultValue: string): InputType => {
   const [value, setValue] = useState(defaultValue);

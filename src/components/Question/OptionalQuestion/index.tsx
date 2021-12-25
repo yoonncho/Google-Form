@@ -2,9 +2,9 @@ import { Radio, Checkbox } from '@material-ui/core';
 import { Wrapper, useStyles } from './style';
 import { useInput } from '../../../hooks';
 
-type QuestionProps = {
+interface QuestionProps {
   type: 'radio' | 'check' | 'dropdown';
-};
+}
 
 const OptionQuestion = ({ type }: QuestionProps) => {
   const classes = useStyles();

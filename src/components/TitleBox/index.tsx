@@ -1,9 +1,23 @@
 import { Wrapper } from './style';
-import { useInput } from '../../hooks';
 
-const TitleBox = () => {
-  const title = useInput('');
-  const detail = useInput('');
+export interface FormProps {
+  formTitle: string;
+  formDetail: string;
+}
+
+interface Props {
+  info: FormProps;
+  setInfo: React.Dispatch<React.SetStateAction<FormProps>>;
+}
+
+const TitleBox = ({ info, setInfo }: Props) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setInfo({
+      ...info,
+      [name]: value,
+    });
+  };
 
   return (
     <Wrapper>
@@ -12,15 +26,17 @@ const TitleBox = () => {
           type="text"
           className="title-input"
           placeholder="제목 없는 설문지"
-          value={title.value}
-          onChange={title.onChange}
+          name="formTitle"
+          value={info.formTitle}
+          onChange={handleChange}
         />
         <input
           type="text"
           className="detail-input"
           placeholder="설문지 설명"
-          value={detail.value}
-          onChange={detail.onChange}
+          name="formDetail"
+          value={info.formDetail}
+          onChange={handleChange}
         />
       </div>
     </Wrapper>

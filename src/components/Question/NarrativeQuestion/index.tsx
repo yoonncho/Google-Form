@@ -1,8 +1,8 @@
 import { Wrapper } from './style';
 
-type QuestionProps = {
+interface QuestionProps {
   type: 'short' | 'long';
-};
+}
 
 const NarrativeQuestion = ({ type }: QuestionProps) => {
   return (
