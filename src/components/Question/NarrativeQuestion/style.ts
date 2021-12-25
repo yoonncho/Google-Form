@@ -7,6 +7,6 @@ export const Wrapper = styled.div<{ type: string }>`
     line-height: 24px;
     width: ${({ type }) => (type === 'short' ? 50 : 82)}%;
     background: transparent;
-    border-bottom: 1px dashed ${({ theme }) => theme.color.borderGray};
+    border-bottom: 1px dashed ${({ theme }) => theme.color.border_gray};
   }
 `;

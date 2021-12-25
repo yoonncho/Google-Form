@@ -52,7 +52,7 @@ export const Wrapper = styled.div`
 
   hr {
     margin-top: 60px;
-    border: 1px solid ${theme.color.borderGray};
+    border: 1px solid ${theme.color.border_gray};
   }
 
   .settings {

@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       width: theme.spacing(26),
       borderRadius: '4px',
       fontSize: '16px',
-      border: `1px solid ${styleTheme.color.borderGray}`,
+      border: `1px solid ${styleTheme.color.border_gray}`,
 
       '& .MuiSelect-select.MuiSelect-select': {
         padding: '12px',

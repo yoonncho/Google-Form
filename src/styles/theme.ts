@@ -13,7 +13,7 @@ export const theme: DefaultTheme = {
     white: '#ffffff',
     black: '#000000',
     gray: '#F8F9FA',
-    borderGray: '#DADCE0',
+    border_gray: '#DADCE0',
     border_gray2: '#80868B',
     blue: '#4285F4',
     red: '#D93025',

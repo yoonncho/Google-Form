@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
       border: 0;
       outline: 0;
       background: transparent;
-      border-bottom: 1px solid ${({ theme }) => theme.color.borderGray};
+      border-bottom: 1px solid ${({ theme }) => theme.color.border_gray};
     }
 
     &:focus {
