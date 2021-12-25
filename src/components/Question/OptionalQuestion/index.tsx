@@ -4,11 +4,12 @@ import { useInput } from '../../../hooks';
 
 interface QuestionProps {
   type: 'radio' | 'check' | 'dropdown';
+  questionId: number;
 }
 
-const OptionQuestion = ({ type }: QuestionProps) => {
+const OptionQuestion = ({ type, questionId }: QuestionProps) => {
   const classes = useStyles();
-  const option = useInput('옵션 1');
+  const option = useInput(`옵션 ${questionId}`);
 
   const showOptionButton = () => {
     switch (type) {
@@ -17,7 +18,7 @@ const OptionQuestion = ({ type }: QuestionProps) => {
       case 'check':
         return <Checkbox className={classes.root} disabled />;
       case 'dropdown':
-        return <div className="dropdown-option">1</div>;
+        return <div className="dropdown-option">{questionId}</div>;
       default:
         return;
     }
