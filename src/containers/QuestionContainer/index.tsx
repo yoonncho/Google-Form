@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { questionActions } from '../../slices';
 
 interface QuestionProps {
-  questionId: number;
+  questionId: string;
 }
 
 const QuestionContainer = ({ questionId }: QuestionProps) => {

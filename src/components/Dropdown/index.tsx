@@ -28,7 +28,7 @@ const menus = [
 ];
 
 interface Props {
-  questionId: number;
+  questionId: string;
 }
 
 const Dropdown = ({ questionId }: Props) => {

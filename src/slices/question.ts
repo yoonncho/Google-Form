@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { QUESTION_TYPES } from '../const';
+import shortid from 'shortid';
 
 interface Option {
   id: number;
@@ -7,7 +8,7 @@ interface Option {
 }
 
 export interface Question {
-  id: number;
+  id: string;
   type: number;
   questionContent: string;
   isNecessary: boolean;
@@ -16,7 +17,7 @@ export interface Question {
 
 const initialState: Question[] = [
   {
-    id: 0,
+    id: shortid(),
     type: QUESTION_TYPES.ONE_CHOICE,
     questionContent: '',
     isNecessary: false,
@@ -33,8 +34,8 @@ const initialState: Question[] = [
   },
 ];
 
-const getNewQuestion = (newId: number) => ({
-  id: newId,
+const getNewQuestion = (newQuestionId: string) => ({
+  id: newQuestionId,
   type: QUESTION_TYPES.ONE_CHOICE,
   questionContent: '',
   isNecessary: false,
@@ -57,21 +58,25 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
   reducers: {
     changeType: (state, action) => {
       const { id, type } = action.payload;
-      state[id].type = type;
+      const question = state.find((item) => item.id === id);
+      question && (question.type = type);
     },
 
     setNecessary: (state, action) => {
       const { id, isNecessary } = action.payload;
-      state[id].isNecessary = isNecessary;
+      const question = state.find((item) => item.id === id);
+      question && (question.isNecessary = isNecessary);
     },
 
     setQuestionContent: (state, action) => {
       const { id, questionContent } = action.payload;
-      state[id].questionContent = questionContent;
+      const question = state.find((item) => item.id === id);
+      question && (question.questionContent = questionContent);
     },
 
-    addQuestion: (state) => {
-      state.push(getNewQuestion(state.length));
+    addQuestion: (state, action) => {
+      const newQuestionId = action.payload;
+      state.push(getNewQuestion(newQuestionId));
     },
 
     deleteQuestion: (state, action) => {
@@ -81,12 +86,13 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
 
     addOption: (state, action) => {
       const { id, optionId } = action.payload;
-      const questionId = state.findIndex((item) => item.id === Number(id));
+      const questionId = state.findIndex((item) => item.id === String(id));
       state[questionId].options.push(getNewOption(optionId));
     },
+
     setOptionContent: (state, action) => {
       const { id, optionId, optionContent } = action.payload;
-      const questionId = state.findIndex((item) => item.id === Number(id));
+      const questionId = state.findIndex((item) => item.id === String(id));
       const optionIdx = state[questionId].options.findIndex((item) => item.id === Number(optionId));
       state[questionId].options[optionIdx].optionContent = optionContent;
     },

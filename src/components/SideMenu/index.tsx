@@ -4,6 +4,7 @@ import { Wrapper } from './style';
 import { useDispatch } from 'react-redux';
 import { formActions, questionActions } from '../../slices';
 import { Link } from 'react-router-dom';
+import shortid from 'shortid';
 
 interface Props {
   info: FormProps;
@@ -17,7 +18,8 @@ const SideMenu = ({ info }: Props) => {
   };
 
   const handleAddQuestion = () => {
-    dispatch(questionActions.addQuestion());
+    const newQuestionId = shortid();
+    dispatch(questionActions.addQuestion(newQuestionId));
   };
 
   return (

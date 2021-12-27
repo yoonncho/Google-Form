@@ -8,7 +8,7 @@ import { useEffect, useRef } from 'react';
 
 interface QuestionProps {
   type: number;
-  questionId: number;
+  questionId: string;
   optionId: number;
   isLast: boolean;
 }
