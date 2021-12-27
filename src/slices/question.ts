@@ -46,6 +46,11 @@ const getNewQuestion = (newId: number) => ({
   ],
 });
 
+const getNewOption = (newId: number) => ({
+  id: newId,
+  optionContent: '',
+});
+
 const { actions: questionActions, reducer: questionReducer } = createSlice({
   name: 'question',
   initialState,
@@ -54,23 +59,36 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
       const { id, type } = action.payload;
       state[id].type = type;
     },
+
     setNecessary: (state, action) => {
       const { id, isNecessary } = action.payload;
       state[id].isNecessary = isNecessary;
     },
+
     setQuestionContent: (state, action) => {
       const { id, questionContent } = action.payload;
       state[id].questionContent = questionContent;
     },
+
     addQuestion: (state) => {
       state.push(getNewQuestion(state.length));
     },
+
     deleteQuestion: (state, action) => {
       const id = action.payload;
-      state.splice(
-        state.findIndex((item) => item.id === Number(id)),
-        1,
-      );
+      return state.filter((item) => item.id !== id);
+    },
+
+    addOption: (state, action) => {
+      const { id, optionId } = action.payload;
+      const questionId = state.findIndex((item) => item.id === Number(id));
+      state[questionId].options.push(getNewOption(optionId));
+    },
+    setOptionContent: (state, action) => {
+      const { id, optionId, optionContent } = action.payload;
+      const questionId = state.findIndex((item) => item.id === Number(id));
+      const optionIdx = state[questionId].options.findIndex((item) => item.id === Number(optionId));
+      state[questionId].options[optionIdx].optionContent = optionContent;
     },
   },
 });

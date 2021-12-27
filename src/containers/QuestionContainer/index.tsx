@@ -18,10 +18,11 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const { questions } = useAppSelector((state) => state.form);
+
   const selectedQuestion = questions.find((item) => item.id === questionId);
-  const questionType = selectedQuestion?.type;
-  const options = selectedQuestion?.options;
-  const questionContent = selectedQuestion?.questionContent;
+  if (!selectedQuestion) return null;
+  const { type: questionType, options, questionContent } = selectedQuestion;
+  const lastOptionIndex = options.length + 1;
 
   useEffect(() => {
     dispatch(questionActions.setNecessary({ id: questionId, isNecessary: isChecked }));
@@ -39,20 +40,29 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
     dispatch(questionActions.deleteQuestion(questionId));
   };
 
+  const getOptionList = (type: number) => {
+    const optionList = options
+      ?.map((option) => (
+        <OptionalQuestion key={option.id} questionId={questionId} optionId={option.id} type={type} isLast={false} />
+      ))
+      .concat(
+        <OptionalQuestion
+          key={lastOptionIndex}
+          questionId={questionId}
+          optionId={lastOptionIndex}
+          type={type}
+          isLast
+        />,
+      );
+    return optionList;
+  };
+
   const getInput = () => {
     switch (questionType) {
       case QUESTION_TYPES.ONE_CHOICE:
-        return options?.map((option) => (
-          <OptionalQuestion key={option.id} questionId={option.id} type={QUESTION_TYPES.ONE_CHOICE} />
-        ));
       case QUESTION_TYPES.MULTIPLE_CHOICE:
-        return options?.map((option) => (
-          <OptionalQuestion key={option.id} questionId={option.id} type={QUESTION_TYPES.MULTIPLE_CHOICE} />
-        ));
       case QUESTION_TYPES.DROP_DOWN:
-        return options?.map((option) => (
-          <OptionalQuestion key={option.id} questionId={option.id} type={QUESTION_TYPES.DROP_DOWN} />
-        ));
+        return getOptionList(questionType);
       case QUESTION_TYPES.SHORT_ANSWER:
         return <NarrativeQuestion type="short" />;
       case QUESTION_TYPES.LONG_ANSWER:

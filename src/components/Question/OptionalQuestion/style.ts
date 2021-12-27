@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ isLast: boolean }>`
   display: flex;
   height: 42px;
   margin-top: 10px;
@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
   }
 
   input {
+    color: ${({ isLast, theme }) => (isLast ? theme.color.border_gray2 : theme.color.black)};
     font-size: 14px;
     width: 84%;
 
