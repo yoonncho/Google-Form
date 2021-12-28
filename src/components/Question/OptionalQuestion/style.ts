@@ -17,6 +17,7 @@ export const Wrapper = styled.div<{ isLast: boolean }>`
     color: ${({ isLast, theme }) => (isLast ? theme.color.border_gray2 : theme.color.black)};
     font-size: 14px;
     width: 84%;
+    border: none;
 
     &:hover {
       border: 0;
@@ -30,6 +31,11 @@ export const Wrapper = styled.div<{ isLast: boolean }>`
       transition: 0.1s ease;
       border-bottom: 2px solid ${({ theme }) => theme.color.purple};
     }
+  }
+
+  .preview-option {
+    font-size: 14px;
+    ${({ theme }) => theme.flexCenter}
   }
 `;
 

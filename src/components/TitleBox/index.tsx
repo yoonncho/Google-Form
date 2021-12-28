@@ -1,36 +1,50 @@
 import { Wrapper } from './style';
+import { useLocation } from 'react-router-dom';
 
 export interface FormProps {
-  formTitle: string;
-  formDetail: string;
+  title: string;
+  detail: string;
 }
 
 interface Props {
   info: FormProps;
-  handleChange: (name: string, value: string) => void;
+  handleChange?: (name: string, value: string) => void;
 }
 
 const TitleBox = ({ info, handleChange }: Props) => {
+  const location = useLocation();
+  const { pathname } = location;
+  const isPreview = pathname === '/preview';
+
   return (
     <Wrapper>
-      <div className="inputs">
-        <input
-          type="text"
-          className="title-input"
-          placeholder="제목 없는 설문지"
-          name="formTitle"
-          value={info.formTitle}
-          onChange={({ target: { value } }) => handleChange('formTitle', value)}
-        />
-        <input
-          type="text"
-          className="detail-input"
-          placeholder="설문지 설명"
-          name="formDetail"
-          value={info.formDetail}
-          onChange={({ target: { value } }) => handleChange('formDetail', value)}
-        />
-      </div>
+      {!isPreview ? (
+        <div className="inputs">
+          <input
+            type="text"
+            className="inputs__title"
+            placeholder="제목 없는 설문지"
+            name="title"
+            value={info.title}
+            onChange={({ target: { value } }) => handleChange && handleChange('title', value)}
+          />
+          <input
+            type="text"
+            className="inputs__detail"
+            placeholder="설문지 설명"
+            name="detail"
+            value={info.detail}
+            onChange={({ target: { value } }) => handleChange && handleChange('detail', value)}
+          />
+        </div>
+      ) : (
+        <div className="preview">
+          <div className="preview__title">{info.title}</div>
+          <div className="preview__detail">{info.detail}</div>
+          <hr />
+          <div className="preview__guide">* 필수항목</div>
+        </div>
+      )}
     </Wrapper>
   );
 };

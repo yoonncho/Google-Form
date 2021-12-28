@@ -5,19 +5,23 @@ import { QUESTION_TYPES } from '../../../const';
 import { useDispatch } from 'react-redux';
 import { questionActions } from '../../../slices';
 import { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface QuestionProps {
   type: number;
   questionId: string;
   optionId: number;
+  optionContent?: string;
   isLast: boolean;
 }
 
-const OptionalQuestion = ({ type, optionId, questionId, isLast }: QuestionProps) => {
+const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast }: QuestionProps) => {
   const classes = useStyles();
   const option = useInput(isLast ? '옵션 추가' : `옵션 ${optionId}`);
   const dispatch = useDispatch();
   const isMounted = useRef(false); // 첫 동작 방지 위함
+  const location = useLocation();
+  const isPreview = location.pathname === '/preview';
 
   const handleAddOption = () => {
     isLast && dispatch(questionActions.addOption({ id: questionId, optionId }));
@@ -34,9 +38,9 @@ const OptionalQuestion = ({ type, optionId, questionId, isLast }: QuestionProps)
   const showOptionButton = () => {
     switch (type) {
       case QUESTION_TYPES.ONE_CHOICE:
-        return <Radio className={classes.root} disabled />;
+        return <Radio className={classes.root} disabled={isPreview ? false : true} />;
       case QUESTION_TYPES.MULTIPLE_CHOICE:
-        return <Checkbox className={classes.root} disabled />;
+        return <Checkbox className={classes.root} disabled={isPreview ? false : true} />;
       case QUESTION_TYPES.DROP_DOWN:
         return <div className="dropdown-option">{optionId}</div>;
       default:
@@ -47,7 +51,11 @@ const OptionalQuestion = ({ type, optionId, questionId, isLast }: QuestionProps)
   return (
     <Wrapper isLast={isLast}>
       {showOptionButton()}
-      <input type="text" value={option.value} onChange={option.onChange} onClick={handleAddOption} />
+      {isPreview ? (
+        <div className="preview-option">{optionContent}</div>
+      ) : (
+        <input type="text" value={option.value} onChange={option.onChange} onClick={handleAddOption} />
+      )}
     </Wrapper>
   );
 };

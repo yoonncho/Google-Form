@@ -25,7 +25,7 @@ const SideMenu = ({ info }: Props) => {
   return (
     <Wrapper>
       <div className="container">
-        <Link to="/preview" target="_blank" rel="noreferrer noopener">
+        <Link to="/preview">
           <img onClick={handlePreview} src={ShowIcon} alt="preview" />
         </Link>
         <img onClick={handleAddQuestion} src={AddIcon} alt="add" />

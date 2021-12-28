@@ -8,8 +8,8 @@ const Main = () => {
   const { questions } = useAppSelector((state) => state.form);
 
   const [info, setInfo] = useState({
-    formTitle: '',
-    formDetail: '',
+    title: '',
+    detail: '',
   });
 
   const handleInfo = (name: string, value: string) => {
@@ -30,7 +30,7 @@ const Main = () => {
   );
 };
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   ${({ theme }) => theme.flexCenter};
   flex-direction: column;
   margin-top: 100px;
