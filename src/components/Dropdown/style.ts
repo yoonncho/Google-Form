@@ -1,4 +1,5 @@
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
+import styled from 'styled-components';
 import { theme as styleTheme } from '../../styles/theme';
 
 export const useStyles = makeStyles((theme: Theme) =>
@@ -25,3 +26,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
+export const Wrapper = styled.div`
+  display: block;
+`;

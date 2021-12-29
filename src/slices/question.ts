@@ -13,6 +13,7 @@ export interface Question {
   questionContent: string;
   isNecessary: boolean;
   options: Option[];
+  answers: Option[];
 }
 
 const initialState: Question[] = [
@@ -31,6 +32,7 @@ const initialState: Question[] = [
         optionContent: '',
       },
     ],
+    answers: [],
   },
 ];
 
@@ -45,6 +47,7 @@ const getNewQuestion = (newQuestionId: string) => ({
       optionContent: '',
     },
   ],
+  answers: [],
 });
 
 const getNewOption = (newId: number) => ({
@@ -63,9 +66,9 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
     },
 
     setNecessary: (state, action) => {
-      const { id, isNecessary } = action.payload;
+      const id = action.payload;
       const question = state.find((item) => item.id === id);
-      question && (question.isNecessary = isNecessary);
+      question && (question.isNecessary = !question.isNecessary);
     },
 
     setQuestionContent: (state, action) => {

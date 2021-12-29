@@ -16,20 +16,15 @@ interface QuestionProps {
 const QuestionContainer = ({ questionId }: QuestionProps) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState<boolean>(false);
   const { questions } = useAppSelector((state) => state.form);
 
   const selectedQuestion = questions.find((item) => item.id === questionId);
   if (!selectedQuestion) return null;
-  const { type: questionType, options, questionContent } = selectedQuestion;
+  const { type: questionType, options, questionContent, isNecessary } = selectedQuestion;
   const lastOptionIndex = options.length + 1;
 
-  useEffect(() => {
-    dispatch(questionActions.setNecessary({ id: questionId, isNecessary: isChecked }));
-  }, [isChecked]);
-
   const handleSwitch = () => {
-    setIsChecked((isChecked) => !isChecked);
+    dispatch(questionActions.setNecessary(questionId));
   };
 
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +86,7 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
         <img src={CopyIcon} alt="copy" />
         <img onClick={handleDeleteQuestion} src={TrashIcon} alt="trash" />
         <div className="switch-label">필수</div>
-        <Switch className={classes.colorSecondary} checked={isChecked} onChange={handleSwitch} />
+        <Switch className={classes.colorSecondary} checked={isNecessary} onChange={handleSwitch} />
       </div>
     </Wrapper>
   );
