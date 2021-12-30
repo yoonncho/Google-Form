@@ -121,6 +121,12 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
         item.narrativeAnswer = '';
       });
     },
+
+    reorderQuestion: (state, action) => {
+      const { firstIdx, secondIdx } = action.payload;
+      const [removed] = state.splice(firstIdx, 1);
+      state.splice(secondIdx, 0, removed);
+    },
   },
 });
 

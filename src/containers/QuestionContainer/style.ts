@@ -22,6 +22,13 @@ export const Wrapper = styled.div`
   padding: 10px 20px;
   height: auto !important;
 
+  .handler {
+    ${({ theme }) => theme.flexCenter}
+    .drag-icon {
+      width: 40px;
+    }
+  }
+
   input {
     border: none;
   }

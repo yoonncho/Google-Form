@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import Dropdown from '../../components/Dropdown';
-import { CopyIcon, TrashIcon } from '../../assets';
+import { CopyIcon, DragIcon, TrashIcon } from '../../assets';
 import { Wrapper, useStyles } from './style';
 import { Switch } from '@material-ui/core';
 import { QUESTION_TYPES } from '../../const';
@@ -8,6 +8,7 @@ import { NarrativeQuestion, OptionalQuestion } from '../../components/Question';
 import { useDispatch } from 'react-redux';
 import { questionActions } from '../../slices';
 import shortid from 'shortid';
+import { DraggableProvided } from 'react-beautiful-dnd';
 
 const menus = [
   { id: QUESTION_TYPES.SHORT_ANSWER, option: '단답형' },
@@ -31,9 +32,10 @@ const menus = [
 
 interface QuestionProps {
   questionId: string;
+  provided: DraggableProvided;
 }
 
-const QuestionContainer = ({ questionId }: QuestionProps) => {
+const QuestionContainer = ({ questionId, provided }: QuestionProps) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { questions } = useAppSelector((state) => state.form);
@@ -109,6 +111,9 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
 
   return (
     <Wrapper>
+      <div className="handler" {...provided.dragHandleProps}>
+        <img className="drag-icon" src={DragIcon} alt="" />
+      </div>
       <div className="question">
         <input
           className="question-input"
