@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Main, Preview } from './pages';
+import { Main, Preview, Result } from './pages';
 
 const App = () => {
   return (
@@ -7,6 +7,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/preview" element={<Preview />} />
+        <Route path="/result" element={<Result />} />
       </Routes>
     </BrowserRouter>
   );

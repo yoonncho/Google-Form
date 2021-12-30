@@ -33,7 +33,7 @@ const Main = () => {
 export const Wrapper = styled.div`
   ${({ theme }) => theme.flexCenter};
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 140px;
   position: relative;
   margin-bottom: 100px;
 `;

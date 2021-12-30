@@ -15,10 +15,11 @@ const TitleBox = ({ info, handleChange }: Props) => {
   const location = useLocation();
   const { pathname } = location;
   const isPreview = pathname === '/preview';
+  const isResult = pathname === '/result';
 
   return (
     <Wrapper>
-      {!isPreview ? (
+      {!isPreview && !isResult ? (
         <div className="inputs">
           <input
             type="text"

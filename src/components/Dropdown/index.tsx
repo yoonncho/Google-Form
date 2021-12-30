@@ -25,6 +25,7 @@ const Dropdown = ({ questionId, menus, isAnswer }: Props) => {
 
   const location = useLocation();
   const isPreview = location.pathname === '/preview';
+  const isResult = location.pathname === '/result';
 
   const questions = useAppSelector((state) => state.questions);
   const question = questions.find((item) => item.id === questionId);
@@ -37,7 +38,12 @@ const Dropdown = ({ questionId, menus, isAnswer }: Props) => {
   };
 
   const handleAnswerChange = (e: React.ChangeEvent<{ value: unknown }>) => {
-    dispatch(questionActions.markOneAnswer({ id: questionId, optionId: e.target.value, isAnswer: isAnswer }));
+    dispatch(questionActions.markOneAnswer({ id: questionId, optionId: e.target.value, isAnswer }));
+  };
+
+  const showValue = () => {
+    if (isPreview || isResult) return selectedAnswer;
+    else return questionType;
   };
 
   return (
@@ -46,7 +52,8 @@ const Dropdown = ({ questionId, menus, isAnswer }: Props) => {
         <Select
           className={classes.root}
           disableUnderline
-          value={isPreview ? selectedAnswer : questionType}
+          disabled={isResult ? true : false}
+          value={showValue()}
           onChange={isPreview ? handleAnswerChange : handleTypeChange}
         >
           {menus.map((menu) => (

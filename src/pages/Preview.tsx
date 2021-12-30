@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { TitleBox } from '../components';
 import { PreviewContainer } from '../containers';
 import { useAppSelector } from '../hooks';
@@ -13,8 +15,23 @@ const Preview = () => {
       {questions.map((question) => (
         <PreviewContainer key={question.id} questionId={question.id} />
       ))}
+      <Link to={'/result'} style={{ textDecoration: 'none' }}>
+        <Button>제출</Button>
+      </Link>
     </Wrapper>
   );
 };
+
+const Button = styled.div`
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 10px 0;
+  width: 80px;
+  border-radius: 5px;
+  cursor: pointer;
+  ${({ theme }) => theme.flexCenter}
+  color: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.color.purple};
+`;
 
 export default Preview;

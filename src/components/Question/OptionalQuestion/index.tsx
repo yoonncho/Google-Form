@@ -19,6 +19,7 @@ const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast, i
   const dispatch = useDispatch();
   const location = useLocation();
   const isPreview = location.pathname === '/preview';
+  const isResult = location.pathname === '/result';
 
   const handleAddOption = () => {
     isLast && dispatch(questionActions.addOption({ id: questionId, optionId }));
@@ -28,26 +29,36 @@ const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast, i
     dispatch(questionActions.setOptionContent({ id: questionId, optionId, optionContent: e.target.value }));
   };
 
+  const isChecked = () => {
+    if (isPreview || isResult) return isAnswer;
+    else return false;
+  };
+
+  const isDisabled = () => {
+    if (isResult) return true;
+    else return false;
+  };
+
   const showOptionButton = () => {
     switch (type) {
       case QUESTION_TYPES.ONE_CHOICE:
         return (
           <Radio
             classes={{ root: classes.root, checked: classes.checked }}
-            disabled={isPreview ? false : true}
+            disabled={isDisabled()}
             onClick={() => dispatch(questionActions.markOneAnswer({ id: questionId, optionId, isAnswer }))}
             value={String(optionId)}
-            checked={isPreview ? isAnswer : false}
+            checked={isChecked()}
           />
         );
       case QUESTION_TYPES.MULTIPLE_CHOICE:
         return (
           <Checkbox
             classes={{ root: classes.root, checked: classes.checked }}
-            disabled={isPreview ? false : true}
+            disabled={isDisabled()}
             onChange={() => dispatch(questionActions.markMultipleAnswer({ id: questionId, optionId, isAnswer }))}
             value={String(optionId)}
-            checked={isPreview ? isAnswer : false}
+            checked={isChecked()}
           />
         );
       case QUESTION_TYPES.DROP_DOWN:
@@ -60,7 +71,7 @@ const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast, i
   return (
     <Wrapper isLast={isLast}>
       {showOptionButton()}
-      {isPreview ? (
+      {isPreview || isResult ? (
         <div className="preview-option">{optionContent}</div>
       ) : (
         <input type="text" value={optionContent} onChange={handleContentChange} onClick={handleAddOption} />

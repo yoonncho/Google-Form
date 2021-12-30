@@ -34,5 +34,6 @@ export const Wrapper = styled.div`
   .menu-content {
     width: 150px;
     overflow: hidden;
+    color: ${styleTheme.color.black};
   }
 `;
