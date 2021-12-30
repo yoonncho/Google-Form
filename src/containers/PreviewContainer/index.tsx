@@ -38,9 +38,9 @@ const PreviewContainer = ({ questionId }: SolveProps) => {
       case QUESTION_TYPES.DROP_DOWN:
         return <Dropdown questionId={questionId} menus={options} />;
       case QUESTION_TYPES.SHORT_ANSWER:
-        return <NarrativeQuestion type="short" />;
+        return <NarrativeQuestion type="short" questionId={questionId} />;
       case QUESTION_TYPES.LONG_ANSWER:
-        return <NarrativeQuestion type="long" />;
+        return <NarrativeQuestion type="long" questionId={questionId} />;
       default:
         return;
     }
