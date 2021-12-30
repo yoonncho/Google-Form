@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  right: 20%;
+  margin-left: 60px;
 
   .container {
     ${({ theme }) => theme.flexCenter};

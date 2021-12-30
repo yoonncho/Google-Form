@@ -17,11 +17,13 @@ const Preview = () => {
   };
 
   return (
-    <Wrapper>
-      <TitleBox info={form.form} />
-      {questions.map((question) => (
-        <PreviewContainer key={question.id} questionId={question.id} />
-      ))}
+    <Wrapper style={{ flexDirection: 'column', alignItems: 'center' }}>
+      <div className="question">
+        <TitleBox info={form.form} />
+        {questions.map((question) => (
+          <PreviewContainer key={question.id} questionId={question.id} />
+        ))}
+      </div>
       <Buttons>
         <Link to={'/result'} style={{ textDecoration: 'none' }}>
           <div className="submit-button">제출</div>

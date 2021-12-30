@@ -44,17 +44,19 @@ const Main = () => {
 
   return (
     <Wrapper>
-      <TitleBox info={info} handleChange={handleInfo} />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided) => (
-            <div ref={provided.innerRef}>
-              {getQuestionList()}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <div className="question">
+        <TitleBox info={info} handleChange={handleInfo} />
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided) => (
+              <div ref={provided.innerRef}>
+                {getQuestionList()}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
       <SideMenu info={info} />
     </Wrapper>
   );
@@ -62,9 +64,10 @@ const Main = () => {
 
 export const Wrapper = styled.div`
   ${({ theme }) => theme.flexCenter};
-  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1440px;
+  align-items: flex-start;
   margin-top: 140px;
-  position: relative;
   margin-bottom: 100px;
 `;
 
