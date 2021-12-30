@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
   height: 240px;
   border-radius: 10px;
   margin-top: 20px;
-  padding: 20px;
+  padding: 10px 20px;
   height: auto !important;
 
   input {
@@ -28,7 +28,7 @@ export const Wrapper = styled.div`
 
   .question {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
   }
 

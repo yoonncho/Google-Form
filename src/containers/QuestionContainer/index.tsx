@@ -8,6 +8,26 @@ import { NarrativeQuestion, OptionalQuestion } from '../../components/Question';
 import { useDispatch } from 'react-redux';
 import { questionActions } from '../../slices';
 
+const menus = [
+  { id: QUESTION_TYPES.SHORT_ANSWER, option: '단답형' },
+  {
+    id: QUESTION_TYPES.LONG_ANSWER,
+    option: '장문형',
+  },
+  {
+    id: QUESTION_TYPES.ONE_CHOICE,
+    option: '객관식 질문',
+  },
+  {
+    id: QUESTION_TYPES.MULTIPLE_CHOICE,
+    option: '체크박스',
+  },
+  {
+    id: QUESTION_TYPES.DROP_DOWN,
+    option: '드롭다운',
+  },
+];
+
 interface QuestionProps {
   questionId: string;
 }
@@ -41,7 +61,7 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
           key={option.id}
           questionId={questionId}
           optionId={option.id}
-          optionContent={option.optionContent}
+          optionContent={option.option}
           type={type}
           isLast={false}
         />
@@ -85,7 +105,7 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
           onChange={handleQuestionChange}
         />
 
-        <Dropdown questionId={questionId} />
+        <Dropdown questionId={questionId} menus={menus} />
       </div>
       {getInput()}
       <hr />

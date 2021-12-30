@@ -35,7 +35,7 @@ const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast, i
           <Radio
             classes={{ root: classes.root, checked: classes.checked }}
             disabled={isPreview ? false : true}
-            onClick={() => dispatch(questionActions.markRadioAnswer({ id: questionId, optionId, isAnswer }))}
+            onClick={() => dispatch(questionActions.markOneAnswer({ id: questionId, optionId, isAnswer }))}
             value={String(optionId)}
             checked={isPreview ? isAnswer : false}
           />
@@ -45,7 +45,7 @@ const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast, i
           <Checkbox
             classes={{ root: classes.root, checked: classes.checked }}
             disabled={isPreview ? false : true}
-            onChange={() => dispatch(questionActions.markCheckAnswer({ id: questionId, optionId, isAnswer }))}
+            onChange={() => dispatch(questionActions.markMultipleAnswer({ id: questionId, optionId, isAnswer }))}
             value={String(optionId)}
             checked={isPreview ? isAnswer : false}
           />

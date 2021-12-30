@@ -1,3 +1,4 @@
+import Dropdown from '../../components/Dropdown';
 import { NarrativeQuestion, OptionalQuestion } from '../../components/Question';
 import { QUESTION_TYPES } from '../../const';
 import { useAppSelector } from '../../hooks';
@@ -22,7 +23,7 @@ const PreviewContainer = ({ questionId }: SolveProps) => {
         questionId={questionId}
         optionId={option.id}
         type={type}
-        optionContent={option.optionContent}
+        optionContent={option.option}
         isLast={false}
       />
     ));
@@ -33,8 +34,9 @@ const PreviewContainer = ({ questionId }: SolveProps) => {
     switch (questionType) {
       case QUESTION_TYPES.ONE_CHOICE:
       case QUESTION_TYPES.MULTIPLE_CHOICE:
-      case QUESTION_TYPES.DROP_DOWN:
         return getOptionList(questionType);
+      case QUESTION_TYPES.DROP_DOWN:
+        return <Dropdown questionId={questionId} menus={options} />;
       case QUESTION_TYPES.SHORT_ANSWER:
         return <NarrativeQuestion type="short" />;
       case QUESTION_TYPES.LONG_ANSWER:

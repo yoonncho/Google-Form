@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       borderRadius: '4px',
       fontSize: '16px',
       border: `1px solid ${styleTheme.color.border_gray}`,
+      marginTop: '20px',
 
       '& .MuiSelect-select.MuiSelect-select': {
         padding: '12px',
@@ -29,4 +30,9 @@ export const useStyles = makeStyles((theme: Theme) =>
 
 export const Wrapper = styled.div`
   display: block;
+
+  .menu-content {
+    width: 150px;
+    overflow: hidden;
+  }
 `;

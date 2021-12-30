@@ -4,7 +4,7 @@ import shortid from 'shortid';
 
 interface Option {
   id: number;
-  optionContent: string;
+  option: string;
 }
 
 export interface Question {
@@ -26,7 +26,7 @@ const initialState: Question[] = [
     options: [
       {
         id: 1,
-        optionContent: '옵션 1',
+        option: '옵션 1',
       },
     ],
     answers: [],
@@ -42,7 +42,7 @@ const getNewQuestion = (newQuestionId: string) => ({
   options: [
     {
       id: 1,
-      optionContent: '옵션 1',
+      option: '옵션 1',
     },
   ],
   answers: [],
@@ -51,7 +51,7 @@ const getNewQuestion = (newQuestionId: string) => ({
 
 const getNewOption = (newId: number) => ({
   id: newId,
-  optionContent: `옵션 ${newId}`,
+  option: `옵션 ${newId}`,
 });
 
 const { actions: questionActions, reducer: questionReducer } = createSlice({
@@ -62,6 +62,7 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
       const { id, type } = action.payload;
       const question = state.find((item) => item.id === id);
       question && (question.type = type);
+      question && (question.answers = []);
     },
 
     setNecessary: (state, action) => {
@@ -96,10 +97,10 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
       const { id, optionId, optionContent } = action.payload;
       const questionId = state.findIndex((item) => item.id === String(id));
       const optionIdx = state[questionId].options.findIndex((item) => item.id === Number(optionId));
-      state[questionId].options[optionIdx].optionContent = optionContent;
+      state[questionId].options[optionIdx].option = optionContent;
     },
 
-    markRadioAnswer: (state, action) => {
+    markOneAnswer: (state, action) => {
       const { id, optionId, isAnswer } = action.payload;
       const question = state.find((item) => item.id === id);
       if (!question) return;
@@ -109,7 +110,7 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
       }
     },
 
-    markCheckAnswer: (state, action) => {
+    markMultipleAnswer: (state, action) => {
       const { id, optionId, isAnswer } = action.payload;
       const question = state.find((item) => item.id === id);
       if (!question) return;
