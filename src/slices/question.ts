@@ -34,21 +34,6 @@ const initialState: Question[] = [
   },
 ];
 
-const getNewQuestion = (newQuestionId: string) => ({
-  id: newQuestionId,
-  type: QUESTION_TYPES.ONE_CHOICE,
-  questionContent: '',
-  isNecessary: false,
-  options: [
-    {
-      id: 1,
-      option: '옵션 1',
-    },
-  ],
-  answers: [],
-  narrativeAnswer: '',
-});
-
 const getNewOption = (newId: number) => ({
   id: newId,
   option: `옵션 ${newId}`,
@@ -78,8 +63,8 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
     },
 
     addQuestion: (state, action) => {
-      const newQuestionId = action.payload;
-      state.push(getNewQuestion(newQuestionId));
+      const newQuestion = action.payload;
+      state.push(newQuestion);
     },
 
     deleteQuestion: (state, action) => {

@@ -7,6 +7,7 @@ import { QUESTION_TYPES } from '../../const';
 import { NarrativeQuestion, OptionalQuestion } from '../../components/Question';
 import { useDispatch } from 'react-redux';
 import { questionActions } from '../../slices';
+import shortid from 'shortid';
 
 const menus = [
   { id: QUESTION_TYPES.SHORT_ANSWER, option: '단답형' },
@@ -42,6 +43,13 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
   const { type: questionType, options, questionContent, isNecessary } = selectedQuestion;
   const lastOptionIndex = options.length + 1;
 
+  const newQuestion = (newId: string) => {
+    return {
+      ...selectedQuestion,
+      id: newId,
+    };
+  };
+
   const handleSwitch = () => {
     dispatch(questionActions.setNecessary(questionId));
   };
@@ -52,6 +60,11 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
 
   const handleDeleteQuestion = () => {
     dispatch(questionActions.deleteQuestion(questionId));
+  };
+
+  const handleCopyQuestion = () => {
+    const newId = shortid();
+    dispatch(questionActions.addQuestion(newQuestion(newId)));
   };
 
   const getOptionList = (type: number) => {
@@ -110,7 +123,7 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
       {getInput()}
       <hr />
       <div className="settings">
-        <img src={CopyIcon} alt="copy" />
+        <img onClick={handleCopyQuestion} src={CopyIcon} alt="copy" />
         <img onClick={handleDeleteQuestion} src={TrashIcon} alt="trash" />
         <div className="switch-label">필수</div>
         <Switch className={classes.colorSecondary} checked={isNecessary} onChange={handleSwitch} />

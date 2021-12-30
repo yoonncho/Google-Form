@@ -5,10 +5,26 @@ import { useDispatch } from 'react-redux';
 import { formActions, questionActions } from '../../slices';
 import { Link } from 'react-router-dom';
 import shortid from 'shortid';
+import { QUESTION_TYPES } from '../../const';
 
 interface Props {
   info: FormProps;
 }
+
+const newQuestion = (newId: string) => ({
+  id: newId,
+  type: QUESTION_TYPES.ONE_CHOICE,
+  questionContent: '',
+  isNecessary: false,
+  options: [
+    {
+      id: 1,
+      option: '옵션 1',
+    },
+  ],
+  answers: [],
+  narrativeAnswer: '',
+});
 
 const SideMenu = ({ info }: Props) => {
   const dispatch = useDispatch();
@@ -18,8 +34,8 @@ const SideMenu = ({ info }: Props) => {
   };
 
   const handleAddQuestion = () => {
-    const newQuestionId = shortid();
-    dispatch(questionActions.addQuestion(newQuestionId));
+    const newId = shortid();
+    dispatch(questionActions.addQuestion(newQuestion(newId)));
   };
 
   return (
