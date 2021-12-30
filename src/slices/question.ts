@@ -114,6 +114,13 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
         else question.answers.splice(answerIdx, 1);
       }
     },
+
+    resetAnswer: (state) => {
+      state.map((item) => {
+        item.answers = [];
+        item.narrativeAnswer = '';
+      });
+    },
   },
 });
 
