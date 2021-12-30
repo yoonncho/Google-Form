@@ -37,13 +37,21 @@ const QuestionContainer = ({ questionId }: QuestionProps) => {
   const getOptionList = (type: number) => {
     const optionList = options
       ?.map((option) => (
-        <OptionalQuestion key={option.id} questionId={questionId} optionId={option.id} type={type} isLast={false} />
+        <OptionalQuestion
+          key={option.id}
+          questionId={questionId}
+          optionId={option.id}
+          optionContent={option.optionContent}
+          type={type}
+          isLast={false}
+        />
       ))
       .concat(
         <OptionalQuestion
           key={lastOptionIndex}
           questionId={questionId}
           optionId={lastOptionIndex}
+          optionContent="옵션 추가"
           type={type}
           isLast
         />,

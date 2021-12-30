@@ -26,11 +26,7 @@ const initialState: Question[] = [
     options: [
       {
         id: 1,
-        optionContent: '',
-      },
-      {
-        id: 2,
-        optionContent: '',
+        optionContent: '옵션 1',
       },
     ],
     answers: [],
@@ -46,7 +42,7 @@ const getNewQuestion = (newQuestionId: string) => ({
   options: [
     {
       id: 1,
-      optionContent: '',
+      optionContent: '옵션 1',
     },
   ],
   answers: [],
@@ -55,7 +51,7 @@ const getNewQuestion = (newQuestionId: string) => ({
 
 const getNewOption = (newId: number) => ({
   id: newId,
-  optionContent: '',
+  optionContent: `옵션 ${newId}`,
 });
 
 const { actions: questionActions, reducer: questionReducer } = createSlice({
