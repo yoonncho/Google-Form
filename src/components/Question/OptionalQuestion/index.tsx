@@ -13,9 +13,10 @@ interface QuestionProps {
   optionId: number;
   optionContent?: string;
   isLast: boolean;
+  isAnswer?: boolean;
 }
 
-const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast }: QuestionProps) => {
+const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast, isAnswer }: QuestionProps) => {
   const classes = useStyles();
   const option = useInput(isLast ? '옵션 추가' : `옵션 ${optionId}`);
   const dispatch = useDispatch();
@@ -38,9 +39,25 @@ const OptionalQuestion = ({ type, optionId, questionId, optionContent, isLast }:
   const showOptionButton = () => {
     switch (type) {
       case QUESTION_TYPES.ONE_CHOICE:
-        return <Radio className={classes.root} disabled={isPreview ? false : true} />;
+        return (
+          <Radio
+            classes={{ root: classes.root, checked: classes.checked }}
+            disabled={isPreview ? false : true}
+            onClick={() => dispatch(questionActions.markRadioAnswer({ id: questionId, optionId, isAnswer }))}
+            value={String(optionId)}
+            checked={isPreview ? isAnswer : false}
+          />
+        );
       case QUESTION_TYPES.MULTIPLE_CHOICE:
-        return <Checkbox className={classes.root} disabled={isPreview ? false : true} />;
+        return (
+          <Checkbox
+            classes={{ root: classes.root, checked: classes.checked }}
+            disabled={isPreview ? false : true}
+            onChange={() => dispatch(questionActions.markCheckAnswer({ id: questionId, optionId, isAnswer }))}
+            value={String(optionId)}
+            checked={isPreview ? isAnswer : false}
+          />
+        );
       case QUESTION_TYPES.DROP_DOWN:
         return <div className="dropdown-option">{optionId}</div>;
       default:

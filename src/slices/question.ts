@@ -13,7 +13,8 @@ export interface Question {
   questionContent: string;
   isNecessary: boolean;
   options: Option[];
-  answers: Option[];
+  answers: Array<number>;
+  narrativeAnswer: string;
 }
 
 const initialState: Question[] = [
@@ -33,6 +34,7 @@ const initialState: Question[] = [
       },
     ],
     answers: [],
+    narrativeAnswer: '',
   },
 ];
 
@@ -48,6 +50,7 @@ const getNewQuestion = (newQuestionId: string) => ({
     },
   ],
   answers: [],
+  narrativeAnswer: '',
 });
 
 const getNewOption = (newId: number) => ({
@@ -98,6 +101,30 @@ const { actions: questionActions, reducer: questionReducer } = createSlice({
       const questionId = state.findIndex((item) => item.id === String(id));
       const optionIdx = state[questionId].options.findIndex((item) => item.id === Number(optionId));
       state[questionId].options[optionIdx].optionContent = optionContent;
+    },
+
+    markRadioAnswer: (state, action) => {
+      const { id, optionId, isAnswer } = action.payload;
+      const question = state.find((item) => item.id === id);
+      if (!question) return;
+      question.answers.length > 0 && question.answers.splice(-1, 1); // 한개만 저장하기 위함
+      if (!isAnswer) {
+        question.answers.push(optionId);
+      }
+    },
+
+    markCheckAnswer: (state, action) => {
+      const { id, optionId, isAnswer } = action.payload;
+      const question = state.find((item) => item.id === id);
+      if (!question) return;
+      const answerIdx = question.answers.findIndex((item) => item === optionId);
+
+      if (!isAnswer) {
+        question.answers.push(optionId);
+      } else {
+        if (answerIdx === 0) question.answers.shift();
+        else question.answers.splice(answerIdx, 1);
+      }
     },
   },
 });

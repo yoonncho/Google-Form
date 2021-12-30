@@ -4,7 +4,6 @@ import { CopyIcon, TrashIcon } from '../../assets';
 import { Wrapper, useStyles } from './style';
 import { Switch } from '@material-ui/core';
 import { QUESTION_TYPES } from '../../const';
-import { useEffect, useState } from 'react';
 import { NarrativeQuestion, OptionalQuestion } from '../../components/Question';
 import { useDispatch } from 'react-redux';
 import { questionActions } from '../../slices';

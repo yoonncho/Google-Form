@@ -12,10 +12,12 @@ const PreviewContainer = ({ questionId }: SolveProps) => {
   const selectedQuestion = questions.find((item) => item.id === questionId);
   if (!selectedQuestion) return null;
   const { type: questionType, options, questionContent, isNecessary } = selectedQuestion;
+  const isAnswer = (value: number) => selectedQuestion.answers.findIndex((item) => item === value) >= 0;
 
   const getOptionList = (type: number) => {
     const optionList = options?.map((option) => (
       <OptionalQuestion
+        isAnswer={isAnswer(option.id)}
         key={option.id}
         questionId={questionId}
         optionId={option.id}

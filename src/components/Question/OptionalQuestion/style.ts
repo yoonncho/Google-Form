@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import styled from 'styled-components';
+import { theme } from '../../../styles/theme';
 
 export const Wrapper = styled.div<{ isLast: boolean }>`
   display: flex;
@@ -45,5 +46,9 @@ export const useStyles = makeStyles({
       width: '24px',
       height: '24px',
     },
+    '&$checked': {
+      color: `${theme.color.purple}`,
+    },
   },
+  checked: {},
 });
