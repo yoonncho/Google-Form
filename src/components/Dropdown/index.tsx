@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { useStyles } from './style';
@@ -6,6 +5,7 @@ import { ThemeProvider, unstable_createMuiStrictModeTheme } from '@material-ui/c
 import { questionActions } from '../../slices';
 import { useDispatch } from 'react-redux';
 import { QUESTION_TYPES } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 const menus = [
   { id: QUESTION_TYPES.SHORT_ANSWER, type: '단답형' },
@@ -33,18 +33,19 @@ interface Props {
 
 const Dropdown = ({ questionId }: Props) => {
   const classes = useStyles();
-  const theme = unstable_createMuiStrictModeTheme();
-  const [type, setType] = useState<unknown>(2);
   const dispatch = useDispatch();
+  const theme = unstable_createMuiStrictModeTheme();
+  const questions = useAppSelector((state) => state.questions);
+  const question = questions.find((item) => item.id === questionId);
+  const questionType = question?.type;
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setType(event.target.value);
-    dispatch(questionActions.changeType({ id: questionId, type: event.target.value }));
+  const handleChange = (e: React.ChangeEvent<{ value: unknown }>) => {
+    dispatch(questionActions.changeType({ id: questionId, type: e.target.value }));
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Select fullWidth className={classes.root} disableUnderline value={type} onChange={handleChange}>
+      <Select fullWidth className={classes.root} disableUnderline value={questionType} onChange={handleChange}>
         {menus.map((menu) => (
           <MenuItem key={menu.id} value={menu.id} className={classes.menu}>
             {menu.type}

@@ -5,10 +5,10 @@ import { QuestionContainer } from '../containers';
 import { useAppSelector } from '../hooks';
 
 const Main = () => {
-  const { questions } = useAppSelector((state) => state.form);
+  const { form, questions } = useAppSelector((state) => state.form);
 
   const [info, setInfo] = useState({
-    title: '',
+    title: form.title,
     detail: '',
   });
 

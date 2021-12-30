@@ -21,7 +21,7 @@ const initialState: Question[] = [
   {
     id: shortid(),
     type: QUESTION_TYPES.ONE_CHOICE,
-    questionContent: '',
+    questionContent: '제목없는 질문',
     isNecessary: false,
     options: [
       {
