@@ -1,46 +1,113 @@
-# Getting Started with Create React App
+## Google-Form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[구글 설문조사 서비스](https://docs.google.com/forms)를 구현해보는 프로젝트입니다
 
-## Available Scripts
+### 서비스 핵심 기능
 
-In the project directory, you can run:
+<img src="https://user-images.githubusercontent.com/49135797/147803061-74a2518b-a23a-44f3-a865-2883192ee711.png"/>
 
-### `yarn start`
+```
+- 설문지의 제목 추가 및 변경
+- 설문지의 설명 추가 및 변경
+- 질문 추가 버튼 클릭 시 새로운 질문 추가
+- 질문 유형은 단답형, 장문형, 객관식, 체크박스, 드롭다운으로 구성
+- 질문 복사 가능
+- 질문 삭제 가능
+- 필수 옵션 선택 가능
+- 미리보기 버튼을 통해 작성한 설문지 확인가능
+- 답안 입력 후 제출 버튼을 통해 입력된 내용 확인가능
+- 양식 지우기 버튼을 통해 입력한 답안 초기화 가능
+- 질문들은 드래그앤드롭으로 순서 변경 가능
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Tech Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[![TypeScript Badge](https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white)]()
+[![React Badge](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white)]()
+[![Redux Badge](https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=white)]()
+[![styled Badge](https://img.shields.io/badge/styled-DB7093?style=flat-square&logo=styled-components&logoColor=white)]()
 
-### `yarn test`
+### Dependencies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+"@material-ui/core": "^4.12.3",
+"@reduxjs/toolkit": "^1.7.1",
+"@testing-library/jest-dom": "^5.14.1",
+"@testing-library/react": "^12.0.0",
+"@testing-library/user-event": "^13.2.1",
+"@types/jest": "^27.0.1",
+"@types/node": "^16.7.13",
+"@types/react": "^17.0.20",
+"@types/react-dom": "^17.0.9",
+"react": "^17.0.2",
+"react-beautiful-dnd": "^13.1.0",
+"react-dom": "^17.0.2",
+"react-redux": "^7.2.6",
+"react-router-dom": "^6.2.1",
+"react-scripts": "5.0.0",
+"redux": "^4.1.2",
+"shortid": "^2.2.16",
+"styled-components": "^5.3.3",
+"typescript": "^4.4.2",
+"web-vitals": "^2.1.0"
+```
 
-### `yarn build`
+### Coding Convention
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+[feat] : 새로운 기능 추가
+[fix] : 버그 수정
+[docs] : 문서 추가 및 변경
+[style] : 코드 포맷팅, 로직의 변화는 없이 띄어쓰기나 탭 문자 등의 사소한 변화
+[refactor] : 리팩토링
+[test] : 테스트 코드 수정 및 변경
+[chore] : 그 외 사소한 변경
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+📦src
+ ┣ 📂assets
+ ┃ ┣ 📂icon
+ ┣ 📂components
+ ┃ ┣ 📂Dropdown
+ ┃ ┣ 📂Question
+ ┃ ┣ 📂SideMenu
+ ┃ ┣ 📂TitleBox
+ ┃ ┣ 📜index.ts
+ ┣ 📂const
+ ┃ ┣ 📜QuestionTypes.ts
+ ┃ ┣ 📜index.ts
+ ┣ 📂containers
+ ┃ ┣ 📂PreviewContainer
+ ┃ ┣ 📂QuestionContainer
+ ┃ ┣ 📜index.ts
+ ┣ 📂hooks
+ ┃ ┣ 📜useAppSelector.ts
+ ┃ ┣ 📜useInput.ts
+ ┃ ┣ 📜index.ts
+ ┣ 📂pages
+ ┃ ┣ 📜Main.tsx
+ ┃ ┣ 📜Preview.tsx
+ ┃ ┣ 📜Result.tsx
+ ┃ ┣ 📜index.ts
+ ┣ 📂slices
+ ┃ ┣ 📜form.ts
+ ┃ ┣ 📜question.ts
+ ┃ ┣ 📜index.ts
+ ┣ 📂store
+ ┃ ┣ 📜configureStore.ts
+ ┣ 📂styles
+```
 
-### `yarn eject`
+### Install & Execute
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+yarn
+yarn start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Demonstration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[시연 영상 확인하기](https://drive.google.com/file/d/1RpVzPdRxzxasbguOW_ISOVYRFsRlOWh5/view?usp=sharing)
