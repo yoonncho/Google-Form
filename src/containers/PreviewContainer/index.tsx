@@ -9,7 +9,7 @@ interface SolveProps {
 }
 
 const PreviewContainer = ({ questionId }: SolveProps) => {
-  const questions = useAppSelector((state) => state.questions);
+  const { questions } = useAppSelector((state) => state.form);
   const selectedQuestion = questions.find((item) => item.id === questionId);
   if (!selectedQuestion) return null;
   const { type: questionType, options, questionContent, isNecessary } = selectedQuestion;

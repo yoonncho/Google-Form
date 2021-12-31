@@ -14,7 +14,7 @@ const NarrativeQuestion = ({ type, questionId }: QuestionProps) => {
   const dispatch = useDispatch();
   const isPreview = location.pathname === '/preview';
   const isResult = location.pathname === '/result';
-  const questions = useAppSelector((state) => state.questions);
+  const { questions } = useAppSelector((state) => state.form);
   const question = questions?.find((item) => item.id === questionId);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

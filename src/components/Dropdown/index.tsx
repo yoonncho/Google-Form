@@ -27,7 +27,7 @@ const Dropdown = ({ questionId, menus, isAnswer }: Props) => {
   const isPreview = location.pathname === '/preview';
   const isResult = location.pathname === '/result';
 
-  const questions = useAppSelector((state) => state.questions);
+  const { questions } = useAppSelector((state) => state.form);
   const question = questions.find((item) => item.id === questionId);
   if (!question) return null;
   const { type: questionType, answers } = question;
