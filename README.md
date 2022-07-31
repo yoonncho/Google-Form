@@ -2,6 +2,8 @@
 
 [구글 설문조사 서비스](https://docs.google.com/forms)를 구현해보는 프로젝트입니다
 
+( redux-toolkit을 다루면서 작성한 [블로그 포스팅](https://velog.io/@yoonvelog/Redux-toolkit) )
+
 ### 서비스 핵심 기능
 
 <img src="https://user-images.githubusercontent.com/49135797/147803061-74a2518b-a23a-44f3-a865-2883192ee711.png"/>
